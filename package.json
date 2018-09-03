@@ -1,0 +1,29 @@
+{
+  "name": "padinet-infrastructure-server",
+  "version": "1.0.0",
+  "description": "server for padinet infrastructure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pojok-webdev/padinet-infrastructure-server.git"
+  },
+  "keywords": [
+    "cytoscape",
+    "padinet",
+    "infrastructure"
+  ],
+  "author": "puji w prayitno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pojok-webdev/padinet-infrastructure-server/issues"
+  },
+  "homepage": "https://github.com/pojok-webdev/padinet-infrastructure-server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "promise-mysql": "^3.3.1"
+  }
+}
