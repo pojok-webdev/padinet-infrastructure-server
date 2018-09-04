@@ -43,4 +43,33 @@ app.post('/saveedge',(req,res)=>{
         res.send(result)
     })
 })
+app.post('/updateedge',(req,res)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log('update Edge invoked',req.body)
+    con.getdata(query.updateEdge(req.body),result => {
+        console.log("updateEdge result",result)
+        res.send(result)
+    })
+})
+app.post('/updatenode',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.updateNode(req.body),result => {
+        console.log("updatenode",result)
+        res.send(result)
+    })
+})
+app.get('/removenode',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.removeNode(req.params),result => {
+        console.log("removenode",result)
+        res.send(result)
+    })
+})
+app.get('/removeedge/:id',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.removeEdge(req.params),result => {
+        console.log("removeedge",result)
+        res.send(result)
+    })
+})
 app.listen(process.env.PORT || 1948);
