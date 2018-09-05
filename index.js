@@ -58,7 +58,7 @@ app.post('/updatenode',(req,res) => {
         res.send(result)
     })
 })
-app.get('/removenode/:id',(req,res) => {
+app.get('/removenode/:mysqlid',(req,res) => {
     res.header("Access-Control-Allow-Origin","*")
     con.getdata(query.removeNode(req.params),result => {
         console.log("removenode",result)
