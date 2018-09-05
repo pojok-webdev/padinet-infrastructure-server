@@ -22,8 +22,16 @@ app.get('/getnodes',(req,res) => {
 app.get('/getedges',(req,res) => {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("getEdges invoked");
-    con.getdata(query.getEdges(),function(result){
-        console.log('Result', result);
+    con.getdata(query.getEdges({}),function(result){
+        //console.log('Result', result);
+        res.send(result);
+    })
+});
+app.get('/getedges/:node_id',(req,res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log("getEdges invoked",req.params);
+    con.getdata(query.getEdges(req.params),function(result){
+        //console.log('Result', result);
         res.send(result);
     })
 });

@@ -1,10 +1,17 @@
 var 
 getnodes = () => {
     sql = 'select * from nodes '
+    console.log("GetNodes",sql)
     return sql
 }
-getEdges = () => {
-    sql = 'select * from links '
+getEdges = obj => {
+    console.log("OBJ",obj)
+    if(obj.node_id == 'null'){
+        sql = 'select * from links '
+    }else{
+        sql = 'select * from links where source="'+obj.node_id+'" or target="'+obj.node_id+'" '
+    }
+    console.log("getEdges",sql)
     return sql
 }
 saveNode = obj => {
