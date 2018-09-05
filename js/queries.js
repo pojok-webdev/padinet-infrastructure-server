@@ -24,15 +24,15 @@ saveNode = obj => {
 }
 saveEdge = obj => {
     sql = 'insert into links '
-    sql+= '(name,linktype,source,target,description,createuser) '
+    sql+= '(name,linktype,source,target,capacity,vendor,description,createuser) '
     sql+= 'values '
-    sql+= '("'+obj.name+'","'+obj.linktype+'","'+obj.source+'","'+obj.target+'","'+obj.description+'","'+obj.createuser+'")'
+    sql+= '("'+obj.name+'","'+obj.linktype+'","'+obj.source+'","'+obj.target+'","'+obj.capacity+'","'+obj.vendor+'","'+obj.description+'","'+obj.createuser+'")'
     console.log("saveEdge query",sql)
     return sql
 }
 updateEdge = obj => {
     sql = 'update links '
-    sql+= 'set name="'+obj.name+'",linktype="'+obj.linktype+'",source="'+obj.source+'",target="'+obj.target+'",description="'+obj.description+'" '
+    sql+= 'set name="'+obj.name+'",linktype="'+obj.linktype+'",source="'+obj.source+'",target="'+obj.target+'",capacity="'+obj.capacity+'",vendor="'+obj.vendor+'",description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
     console.log("updateEdge query",sql)
@@ -42,7 +42,7 @@ updateNode = obj => {
     sql = 'update nodes '
     sql+= 'set id="'+obj.id+'",nodetype="'+obj.nodetype+'",location="'+obj.location+'",description="'+obj.description+'" '
     sql+= 'where '
-    sql+= 'mysqlid="'+obj.mysqlid+'" '
+    sql+= 'id="'+obj.id+'" '
     console.log("updateEdge query",sql)
     return sql
 }
@@ -50,7 +50,7 @@ removeNode = obj => {
     sql = 'delete a,b from nodes a '
     sql+= 'left outer join links b on b.source=a.id '
     sql+= 'left outer join links c on c.target=a.id '
-    sql+= 'where mysqlid='+obj.mysqlid+' '
+    sql+= 'where id='+obj.id+' '
     console.log("remove node Query : ",sql)
     return sql
 }
