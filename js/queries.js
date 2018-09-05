@@ -40,7 +40,9 @@ updateNode = obj => {
     return sql
 }
 removeNode = obj => {
-    sql = 'delete from nodes '
+    sql = 'delete a,b from nodes a '
+    sql+= 'left outer join links b on b.source=a.id '
+    sql+= 'left outer join links c on c.target=a.id '
     sql+= 'where mysqlid='+obj.mysqlid+' '
     console.log("remove node Query : ",sql)
     return sql
