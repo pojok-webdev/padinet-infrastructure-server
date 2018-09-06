@@ -36,6 +36,7 @@ saveEdge = obj => {
     return sql
 }
 updateEdge = obj => {
+    obj.id = (obj.id).substring(1,(obj.id).length)
     sql = 'update links '
     sql+= 'set name="'+obj.name+'",linktype="'+obj.linktype+'",source="'+obj.source+'",target="'+obj.target+'",capacity="'+obj.capacity+'",vendor="'+obj.vendor+'",description="'+obj.description+'" '
     sql+= 'where '
