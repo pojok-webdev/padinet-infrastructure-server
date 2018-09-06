@@ -80,4 +80,11 @@ app.get('/removeedge/:id',(req,res) => {
         res.send(result)
     })
 })
+app.get('/getneighbours/:id',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.getneighbours(req.params),result => {
+        console.log("removeedge",result)
+        res.send(result)
+    })
+})
 app.listen(process.env.PORT || 1948);
