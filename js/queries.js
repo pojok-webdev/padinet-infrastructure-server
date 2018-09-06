@@ -68,6 +68,7 @@ getneighbours = obj => {
     sql+= 'select * from nodes a '
     sql+= 'left outer join links b on b.target=a.id '
     sql+= 'left outer join nodes c on c.id=b.source '
+    sql+= 'where a.id='+obj.id+' ' 
     console.log("Getneighbours sql",sql)
     return sql
 }
