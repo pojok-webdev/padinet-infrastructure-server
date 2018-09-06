@@ -7,9 +7,14 @@ getnodes = () => {
 getEdges = obj => {
     console.log("OBJ",obj)
     if(obj.node_id == 'null'){
-        sql = 'select * from links '
+        sql = 'select a.*,b.name hsource,c.name htarget from links a '
+        sql+= 'left outer join nodes b on b.id=a.source '
+        sql+= 'left outer join nodes c on c.id=a.target '
     }else{
-        sql = 'select * from links where source="'+obj.node_id+'" or target="'+obj.node_id+'" '
+        sql = 'select a.*,b.name hsource,c.name htarget from links a '
+        sql+= 'left outer join nodes b on b.id=a.source '
+        sql+= 'left outer join nodes c on c.id=a.target '
+        sql+= 'where a.source="'+obj.node_id+'" or a.target="'+obj.node_id+'" '
     }
     console.log("getEdges",sql)
     return sql
