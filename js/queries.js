@@ -7,11 +7,11 @@ getnodes = () => {
 getEdges = obj => {
     console.log("OBJ",obj)
     if(obj.node_id == 'null'){
-        sql = 'select a.*,concat("e",a.id)eid,b.name hsource,c.name htarget from links a '
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
         sql+= 'left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
     }else{
-        sql = 'select a.*,concat("e",a.id)eid,b.name hsource,c.name htarget from links a '
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
         sql+= 'left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
         sql+= 'where a.source="'+obj.node_id+'" or a.target="'+obj.node_id+'" '
