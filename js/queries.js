@@ -61,12 +61,12 @@ removeEdge = obj => {
     return sql
 }
 getneighbours = obj => {
-    sql = 'select * from nodes a '
+    sql = 'select c.name,c.address,c.city,b.capacity,b.vendor,b.name lnk from nodes a '
     sql+= 'left outer join links b on b.source=a.id '
     sql+= 'left outer join nodes c on c.id=b.target '
     sql+= 'where a.id='+obj.id+' ' 
     sql+= 'union '
-    sql+= 'select * from nodes a '
+    sql+= 'select c.name,c.address,c.city,b.capacity,b.vendor,b.name lnk from nodes a '
     sql+= 'left outer join links b on b.target=a.id '
     sql+= 'left outer join nodes c on c.id=b.source '
     sql+= 'where a.id='+obj.id+' ' 
