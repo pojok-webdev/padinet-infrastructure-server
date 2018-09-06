@@ -40,7 +40,7 @@ updateEdge = obj => {
 }
 updateNode = obj => {
     sql = 'update nodes '
-    sql+= 'set id="'+obj.id+'",nodetype="'+obj.nodetype+'",address="'+obj.address+'",city="'+obj.city+'",location="'+obj.location+'",description="'+obj.description+'" '
+    sql+= 'set id="'+obj.id+'",name="'+obj.name+'",nodetype="'+obj.nodetype+'",address="'+obj.address+'",city="'+obj.city+'",location="'+obj.location+'",description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
     console.log("updateNode query",sql)
