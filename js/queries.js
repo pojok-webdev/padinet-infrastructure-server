@@ -64,6 +64,7 @@ getneighbours = obj => {
     sql = 'select * from nodes a '
     sql+= 'left outer join links b on b.source=a.id '
     sql+= 'left outer join nodes c on c.id=b.target '
+    sql+= 'where a.id='+obj.id+' ' 
     sql+= 'union '
     sql+= 'select * from nodes a '
     sql+= 'left outer join links b on b.target=a.id '
