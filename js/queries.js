@@ -60,6 +60,17 @@ removeEdge = obj => {
     console.log("remove edge Query : ",sql)
     return sql
 }
+getneighbours = obj => {
+    sql = 'select * from nodes a '
+    sql+= 'left outer join links b on b.source=a.id '
+    sql+= 'left outer join nodes c on c.id=b.target '
+    sql+= 'union '
+    sql+= 'select * from nodes a '
+    sql+= 'left outer join links b on b.target=a.id '
+    sql+= 'left outer join nodes c on c.id=b.source '
+    console.log("Getneighbours sql",sql)
+    return sql
+}
 module.exports = {
     getnodes : getnodes,
     saveNode : saveNode,
@@ -68,5 +79,6 @@ module.exports = {
     updateEdge : updateEdge,
     updateNode : updateNode,
     removeNode : removeNode,
-    removeEdge : removeEdge
+    removeEdge : removeEdge,
+    getneighbours : getneighbours
 };
