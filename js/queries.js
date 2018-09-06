@@ -16,9 +16,9 @@ getEdges = obj => {
 }
 saveNode = obj => {
     sql = 'insert into nodes '
-    sql+= '(id,nodetype,location,description,createuser) '
+    sql+= '(id,nodetype,address,city,location,description,createuser) '
     sql+= 'values '
-    sql+= '("'+obj.id+'","'+obj.nodetype+'","'+obj.location+'","'+obj.description+'","'+obj.createuser+'")'
+    sql+= '("'+obj.id+'","'+obj.nodetype+'","'+obj.address+'","'+obj.city+'","'+obj.location+'","'+obj.description+'","'+obj.createuser+'")'
     console.log("SQL",sql)
     return sql
 }
@@ -40,10 +40,10 @@ updateEdge = obj => {
 }
 updateNode = obj => {
     sql = 'update nodes '
-    sql+= 'set id="'+obj.id+'",nodetype="'+obj.nodetype+'",location="'+obj.location+'",description="'+obj.description+'" '
+    sql+= 'set id="'+obj.id+'",nodetype="'+obj.nodetype+'",address="'+obj.address+'",city="'+obj.city+'",location="'+obj.location+'",description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
-    console.log("updateEdge query",sql)
+    console.log("updateNode query",sql)
     return sql
 }
 removeNode = obj => {
