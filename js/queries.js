@@ -10,11 +10,39 @@ getEdges = obj => {
         sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
         sql+= 'left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
+
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,'
+        sql+= 'a.description,b.name hsource,c.name htarget '
+        sql+= 'from links a left outer join nodes b on b.id=a.source '
+        sql+= 'left outer join nodes c on c.id=a.target '
+        sql+= 'union '
+        sql+= 'select concat("e",a.id)id,a.linktype,a.target,a.source,a.name,a.capacity,a.vendor,'
+        sql+= 'a.description,b.name hsource,c.name htarget '
+        sql+= 'from links a left outer join nodes b on b.id=a.target '
+        sql+= 'left outer join nodes c on c.id=a.source '
+
+
     }else{
         sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
         sql+= 'left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
         sql+= 'where a.source="'+obj.node_id+'" or a.target="'+obj.node_id+'" '
+
+
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,'
+        sql+= 'a.description,b.name hsource,c.name htarget '
+        sql+= 'from links a left outer join nodes b on b.id=a.source '
+        sql+= 'left outer join nodes c on c.id=a.target '
+        sql+= 'where a.source="'+obj.node_id+'" '
+        sql+= 'union '
+        sql+= 'select concat("e",a.id)id,a.linktype,a.target,a.source,a.name,a.capacity,a.vendor,'
+        sql+= 'a.description,b.name hsource,c.name htarget '
+        sql+= 'from links a left outer join nodes b on b.id=a.target '
+        sql+= 'left outer join nodes c on c.id=a.source '
+        sql+= 'where a.target="'+obj.node_id+'"'
+
+
+
     }
     console.log("getEdges",sql)
     return sql
