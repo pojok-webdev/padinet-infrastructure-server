@@ -49,9 +49,9 @@ getEdges = obj => {
 }
 saveNode = obj => {
     sql = 'insert into nodes '
-    sql+= '(id,nodetype,address,city,location,description,createuser) '
+    sql+= '(id,name,nodetype,address,city,location,description,createuser) '
     sql+= 'values '
-    sql+= '("'+obj.id+'","'+obj.nodetype+'","'+obj.address+'","'+obj.city+'","'+obj.location+'","'+obj.description+'","'+obj.createuser+'")'
+    sql+= '("'+obj.id+'","'+obj.name+'","'+obj.nodetype+'","'+obj.address+'","'+obj.city+'","'+obj.location+'","'+obj.description+'","'+obj.createuser+'")'
     console.log("SQL",sql)
     return sql
 }
