@@ -83,8 +83,23 @@ app.get('/removeedge/:id',(req,res) => {
 app.get('/getneighbours/:id',(req,res) => {
     res.header("Access-Control-Allow-Origin","*")
     con.getdata(query.getneighbours(req.params),result => {
-        console.log("removeedge",result)
+        console.log("getneighbour",result)
         res.send(result)
     })
 })
+app.get('/getlinktypes',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.getLinkTypes(),result => {
+        console.log("getlinktypes",result)
+        res.send(result)
+    })
+})
+app.get('/getvendors',(req,res) => {
+    res.header("Access-Control-Allow-Origin","*")
+    con.getdata(query.getVendors(),result => {
+        console.log("getvendors",result)
+        res.send(result)
+    })
+})
+
 app.listen(process.env.PORT || 1948);

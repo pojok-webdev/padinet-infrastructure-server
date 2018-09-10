@@ -109,6 +109,14 @@ getneighbours = obj => {
     console.log("Getneighbours sql",sql)
     return sql
 }
+getLinkTypes = () => {
+    sql = 'select * from linktypes '
+    return sql
+}
+getVendors = () => {
+    sql = 'select * from vendors '
+    return sql
+}
 module.exports = {
     getnodes : getnodes,
     saveNode : saveNode,
@@ -118,5 +126,7 @@ module.exports = {
     updateNode : updateNode,
     removeNode : removeNode,
     removeEdge : removeEdge,
-    getneighbours : getneighbours
+    getneighbours : getneighbours,
+    getLinkTypes : getLinkTypes,
+    getVendors : getVendors
 };
