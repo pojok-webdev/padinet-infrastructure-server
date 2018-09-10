@@ -106,6 +106,7 @@ removeNode = obj => {
     return sql
 }
 removeEdge = obj => {
+    obj.id = (obj.id).substring(1,(obj.id).length)
     sql = 'delete from links '
     sql+= 'where id='+obj.id+' '
     console.log("remove edge Query : ",sql)
