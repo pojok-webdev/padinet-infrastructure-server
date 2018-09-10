@@ -7,10 +7,6 @@ getnodes = () => {
 getEdges = obj => {
     console.log("OBJ",obj)
     if(obj.node_id == 'null'){
-        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
-        sql+= 'left outer join nodes b on b.id=a.source '
-        sql+= 'left outer join nodes c on c.id=a.target '
-
         sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.source '
@@ -20,15 +16,7 @@ getEdges = obj => {
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.target '
         sql+= 'left outer join nodes c on c.id=a.source '
-
-
     }else{
-        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.description,b.name hsource,c.name htarget from links a '
-        sql+= 'left outer join nodes b on b.id=a.source '
-        sql+= 'left outer join nodes c on c.id=a.target '
-        sql+= 'where a.source="'+obj.node_id+'" or a.target="'+obj.node_id+'" '
-
-
         sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.source '
@@ -40,9 +28,6 @@ getEdges = obj => {
         sql+= 'from links a left outer join nodes b on b.id=a.target '
         sql+= 'left outer join nodes c on c.id=a.source '
         sql+= 'where a.target="'+obj.node_id+'"'
-
-
-
     }
     console.log("getEdges",sql)
     return sql
@@ -51,22 +36,48 @@ saveNode = obj => {
     sql = 'insert into nodes '
     sql+= '(name,nodetype,class,address,city,location,description,createuser) '
     sql+= 'values '
-    sql+= '("'+obj.name+'","'+obj.nodetype+'","'+obj.class+'","'+obj.address+'","'+obj.city+'","'+obj.location+'","'+obj.description+'","'+obj.createuser+'")'
+    sql+= '("'+obj.name+'","'
+    sql+= obj.nodetype+'","'
+    sql+= obj.class+'","'
+    sql+= obj.address+'","'
+    sql+= obj.city+'","'
+    sql+= obj.location+'","'
+    sql+= obj.description+'","'
+    sql+= obj.createuser+'")'
     console.log("SQL",sql)
     return sql
 }
 saveEdge = obj => {
     sql = 'insert into links '
-    sql+= '(name,linktype,source,target,capacity,vendor,description,createuser) '
+    sql+= '(name,linktype,source,source_ipaddr,target,target_ipaddr,capacity,vendor,utility,description,createuser) '
     sql+= 'values '
-    sql+= '("'+obj.name+'","'+obj.linktype+'","'+obj.source+'","'+obj.target+'","'+obj.capacity+'","'+obj.vendor+'","'+obj.description+'","'+obj.createuser+'")'
+    sql+= '("'+obj.name+'","'
+    sql+= obj.linktype+'","'
+    sql+= obj.source+'","'
+    sql+= obj.source_ipaddr+'","'
+    sql+= obj.target+'","'
+    sql+= obj.target_ipaddr+'","'
+    sql+= obj.capacity+'","'
+    sql+= obj.vendor+'","'
+    sql+= obj.utility+'","'
+    sql+= obj.description+'","'
+    sql+= obj.createuser+'")'
     console.log("saveEdge query",sql)
     return sql
 }
 updateEdge = obj => {
     obj.id = (obj.id).substring(1,(obj.id).length)
     sql = 'update links '
-    sql+= 'set name="'+obj.name+'",linktype="'+obj.linktype+'",source="'+obj.source+'",target="'+obj.target+'",capacity="'+obj.capacity+'",vendor="'+obj.vendor+'",description="'+obj.description+'" '
+    sql+= 'set name="'+obj.name+'",'
+    sql+= 'linktype="'+obj.linktype+'",'
+    sql+= 'source="'+obj.source+'",'
+    sql+= 'source_ipaddr="'+obj.source_ipaddr+'",'
+    sql+= 'target="'+obj.target+'",'
+    sql+= 'target_ipaddr="'+obj.target_ipaddr+'",'
+    sql+= 'capacity="'+obj.capacity+'",'
+    sql+= 'vendor="'+obj.vendor+'",'
+    sql+= 'utility="'+obj.utility+'",'
+    sql+= 'description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
     console.log("updateEdge query",sql)
@@ -74,7 +85,13 @@ updateEdge = obj => {
 }
 updateNode = obj => {
     sql = 'update nodes '
-    sql+= 'set id="'+obj.id+'",name="'+obj.name+'",nodetype="'+obj.nodetype+'",address="'+obj.address+'",city="'+obj.city+'",location="'+obj.location+'",description="'+obj.description+'" '
+    sql+= 'set id="'+obj.id+'",'
+    sql+= 'name="'+obj.name+'",'
+    sql+= 'nodetype="'+obj.nodetype+'",'
+    sql+= 'address="'+obj.address+'",'
+    sql+= 'city="'+obj.city+'",'
+    sql+= 'location="'+obj.location+'",'
+    sql+= 'description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
     console.log("updateNode query",sql)
