@@ -11,11 +11,11 @@ getEdges = obj => {
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
-        sql+= 'union '
+/*        sql+= 'union '
         sql+= 'select concat("e",a.id)id,a.linktype,a.target,a.source,a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.target '
-        sql+= 'left outer join nodes c on c.id=a.source '
+        sql+= 'left outer join nodes c on c.id=a.source '*/
     }else{
         sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
