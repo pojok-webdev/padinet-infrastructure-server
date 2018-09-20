@@ -7,7 +7,8 @@ getnodes = () => {
 getEdges = obj => {
     console.log("OBJ",obj)
     if(obj.node_id == 'null'){
-        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,'
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,'
+        sql+= 'a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,a.networknode,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
@@ -17,13 +18,15 @@ getEdges = obj => {
         sql+= 'from links a left outer join nodes b on b.id=a.target '
         sql+= 'left outer join nodes c on c.id=a.source '*/
     }else{
-        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,'
+        sql = 'select concat("e",a.id)id,a.linktype,a.source,a.target,'
+        sql+= 'a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,a.networknode,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.source '
         sql+= 'left outer join nodes c on c.id=a.target '
         sql+= 'where a.source="'+obj.node_id+'" '
         sql+= 'union '
-        sql+= 'select concat("e",a.id)id,a.linktype,a.target,a.source,a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,'
+        sql+= 'select concat("e",a.id)id,a.linktype,a.target,a.source,'
+        sql+= 'a.name,a.capacity,a.vendor,a.source_ipaddr,a.target_ipaddr,a.utility,a.networknode,'
         sql+= 'a.description,b.name hsource,b.address saddress,b.city scity,c.name htarget,c.address taddress,c.city tcity '
         sql+= 'from links a left outer join nodes b on b.id=a.target '
         sql+= 'left outer join nodes c on c.id=a.source '
@@ -49,7 +52,7 @@ saveNode = obj => {
 }
 saveEdge = obj => {
     sql = 'insert into links '
-    sql+= '(name,linktype,source,source_ipaddr,target,target_ipaddr,capacity,vendor,utility,description,createuser) '
+    sql+= '(name,linktype,source,source_ipaddr,target,target_ipaddr,capacity,vendor,utility,networknode,description,createuser) '
     sql+= 'values '
     sql+= '("'+obj.name+'","'
     sql+= obj.linktype+'","'
@@ -60,6 +63,7 @@ saveEdge = obj => {
     sql+= obj.capacity+'","'
     sql+= obj.vendor+'","'
     sql+= obj.utility+'","'
+    sql+= obj.networknode+'","'
     sql+= obj.description+'","'
     sql+= obj.createuser+'")'
     console.log("saveEdge query",sql)
@@ -77,6 +81,7 @@ updateEdge = obj => {
     sql+= 'capacity="'+obj.capacity+'",'
     sql+= 'vendor="'+obj.vendor+'",'
     sql+= 'utility="'+obj.utility+'",'
+    sql+= 'networknode="'+obj.networknode+'",'
     sql+= 'description="'+obj.description+'" '
     sql+= 'where '
     sql+= 'id="'+obj.id+'" '
